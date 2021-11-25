@@ -1,8 +1,6 @@
 const express = require("express")
-const cors = require("cors")
 const userRouter = express.Router();
-const { check } = require('express-validator')
-const { addUser, getUser } = require("../controllers/user")
+const { addUser, getUser,loginUser } = require("../controllers/user")
 
 
 // @route GET /api/getUser
@@ -13,13 +11,7 @@ userRouter.get("/getUser/:username", getUser);
 // @route POST /api/getUser
 // @desc Post user info
 // @access Public
-userRouter.post("/addUser",
-    [
-        check('name', 'Name is required!').notEmpty(),
-        check('username', 'Username is required!').notEmpty(),
-        check('email', 'Email is required').notEmpty().isEmail()
-    ],
-    addUser
-);
+userRouter.post("/addUser",addUser);
+userRouter.post("/loginUser",loginUser);
 
 module.exports = userRouter;

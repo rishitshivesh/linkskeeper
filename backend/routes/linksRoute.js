@@ -1,6 +1,6 @@
 const express = require("express")
 const linksRouter = express.Router();
-const { check } = require('express-validator')
+// const { check } = require('express-validator')
 
 const { getAllLinks, addLink, updateLink, deleteLink } = require("../controllers/links")
 
@@ -13,10 +13,10 @@ linksRouter.get("/getLinks/:username", getAllLinks);
 // @desc add new link
 // @access Public
 linksRouter.post("/addLink",
-    [
-        check('name', 'Name is required').notEmpty(),
-        check('link', 'Links is required').notEmpty().isURL()
-    ],
+    // [
+    //     check('name', 'Name is required').notEmpty(),
+    //     check('link', 'Links is required').notEmpty().isURL()
+    // ],
     addLink
 );
 

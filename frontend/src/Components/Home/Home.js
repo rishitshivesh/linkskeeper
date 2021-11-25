@@ -3,9 +3,16 @@ import Styles from "./Home.module.css"
 import Card from "../Cards/Cards"
 import AddCard from "../Cards/NewCard"
 import Adder from "../Cards/AdderCard"
+import axios from "axios"
 
 const Home = (props)=>{
 
+
+    const userEmail = localStorage.getItem('userEmail')
+    if(!userEmail){
+        window.location.replace('/login')
+    }
+    
     const {
         linkList,
         loadLinks,
@@ -15,7 +22,7 @@ const Home = (props)=>{
     const [AdderCard, setAdderCard] = useState(false)
 
     const showAdderCard = ()=>{
-        if(AdderCard == true){
+        if(AdderCard === true){
             alert("first add this link");
         }else{
             setAdderCard(true);
@@ -26,8 +33,11 @@ const Home = (props)=>{
         setAdderCard(false);
     }
 
-    useEffect(()=>{
+    useEffect(async()=>{
         loadLinks()
+
+        // const response = await 
+        // eslint-disable-next-line
     },[])
 
     const submit = (name, link)=>{
@@ -38,6 +48,7 @@ const Home = (props)=>{
         }
 
         //api call for data response
+        
         loadLinks()
         console.log(data);
     }

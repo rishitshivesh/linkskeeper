@@ -1,54 +1,74 @@
 const User = require("../models/user");
-const { validationResult } = require("express-validator");
+const addUser = async (req, res) => {
 
-const addUser = async(req,res) => { 
-
-    const errors = validationResult(req)
-    if(!errors.isEmpty()){
-        return res.status(401).json({errors:errors.array()})
-    }
 
     try {
-        const {name,email,username} = req.body
-
-        // check if user exist with email 
-        const checkUserEmail = await User.findOne({email})
-        if(checkUserEmail){
-            return res.status(400).json({error:"User already exist"})
+        const { name, username } = req.body
+        // check if user exist with username 
+        const checkUserusername = await User.findOne({username })
+        if (checkUserusername) {
+            return res.json({ message: "User already exist"})
         }
+        console.log(checkUserusername)
 
-         // check if user exist with username
-        const checkUserName = await User.findOne({username})
-        if(checkUserName){
-            return res.status(400).json({error:"Username exist"})
-        }
+        
 
         // create user in db 
         const newUser = new User({
-            name,email,username
+            name, username
         });
 
-        await newUser.save();
-        res.status(201).json({msg:"User saved successfully"});
+        const response = await newUser.save();
+        // const response = await newUser.save(function(err,user){
+        //     if(err){
+        //         res.json({message:err})
+        //     }else{
+        //         res.json({user})
+        //     }
+        // });
+        console.log(response)
+        return res.json({ message: "User already exist", "user": response })
+
 
     } catch (error) {
-        res.json({error});
+        res.json({ error });
     }
 }
 
-const getUser = async(req,res)=>{
+const loginUser = async (req, res) => {
+
+
+    try {
+        const { username } = req.body
+
+        // check if user exist with username 
+        const checkUserusername = await User.findOne({ username })
+        if (!checkUserusername) {
+            return res.json({ message: "User doesen't exist" })
+        }
+
+        console.log(response)
+        return res.json({ message: "Login SuccessFull!", "user": checkUserusername })
+
+
+    } catch (error) {
+        res.json({ error });
+    }
+}
+
+const getUser = async (req, res) => {
     try {
         const username = req.params.username
-        
+
         // find user in db by username
-        const user = await User.findOne({username})
-        if(!user){
-            return res.status(400).json({err:"user doesn't exist"})
+        const user = await User.findOne({ username })
+        if (!user) {
+            return res.status(400).json({ err: "user doesn't exist" })
         }
         res.status(200).json(user)
     } catch (error) {
-        res.json({error});
+        res.json({ error });
     }
 }
 
-module.exports= {addUser,getUser}
+module.exports = { addUser, getUser,loginUser }

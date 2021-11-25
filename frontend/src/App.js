@@ -6,18 +6,25 @@ import Navbar from "../src/Components/Navbar/Navbar"
 import Login from "../src/Components/Login/Login"
 // import Modal from './Components/modal/Modal';
 import { useEffect, useState } from 'react';
-
+import axios from "axios";
 function App() {
 
-  const [linkList,setLinkList] = useState([])
+
+  const [linkList, setLinkList] = useState([])
   const [userName, setUserName] = useState(null);
   // console.log(userName)
 
-  useEffect(()=>{
+  useEffect(() => {
     setUserName("samar")
-  },[])
+  }, [])
+  useEffect(() => {
+    const username = localStorage.getItem('Username')
 
-  const loadLinks = ()=>{
+    axios.get(`/api/getLinks/${username}`).then(res => setLinkList(res.data))
+    console.log(linkList)
+  }, [])
+
+  const loadLinks = () => {
 
     setLinkList([
       1,
@@ -31,12 +38,12 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Navbar userName={userName}/>
-            <Home linkList={linkList} setLinkList={setLinkList} loadLinks={loadLinks} userName={userName}/>
+            <Navbar userName={userName} />
+            <Home linkList={linkList} setLinkList={setLinkList} loadLinks={loadLinks} userName={userName} />
           </Route>
         </Switch>
         <Route exact path="/Login">
-          <Login/>
+          <Login />
         </Route>
       </Router>
     </div>

@@ -1,5 +1,5 @@
 const Links = require("../models/links");
-const {validationResult} = require('express-validator')
+// const {validationResult} = require('express-validator')
 
 const getAllLinks = async(req,res) =>{
 
@@ -20,11 +20,11 @@ const getAllLinks = async(req,res) =>{
 
 const addLink = async(req,res) => {
     
-    const errors = validationResult(req)
+    // const errors = validationResult(req)
 
-    if(!errors.isEmpty()){
-        return res.status(401).json({errors:errors.array()});
-    }
+    // if(!errors.isEmpty()){
+    //     return res.status(401).json({errors:errors.array()});
+    // }
     
     try {
         const {link,name,username}=req.body

@@ -1,9 +1,10 @@
-import React from "react"
+import React,{useState} from "react"
 import Styles from "./NAvbar.module.css"
 import Logo from "../../Assets/logo.svg"
-import { AiOutlineLogout } from "react-icons/ai"
+// import { AiOutlineLogout } from "react-icons/ai"
 
 const Navbar = ()=>{
+    const [Name, setName] = useState("User")
     return(
         <div className={Styles.majorContainer}>
             <div>
@@ -11,8 +12,8 @@ const Navbar = ()=>{
                 <p style={{fontSize:"30px"}}><b>LINK</b>KEEPER</p>
             </div>
             <div>
-                <AiOutlineLogout/>
-                <p>Logout</p>
+                <p>{Name}</p>
+                
             </div>
         </div>
     )
