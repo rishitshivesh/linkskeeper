@@ -9,35 +9,30 @@ import { useEffect, useState } from 'react';
 
 function App() {
 
-  const [linkList,setLinklist] = useState([])
+  const [linkList,setLinkList] = useState([])
   const [userName, setUserName] = useState(null);
-  console.log(userName)
+  // console.log(userName)
 
   useEffect(()=>{
-    setUserName("")
-  },[userName])
+    setUserName("samar")
+  },[])
 
   const loadLinks = ()=>{
 
-    setLinklist([
+    setLinkList([
       1,
       2,
       3
     ])
 
   }
-
-  const submit = ()=>{
-
-  }
-
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route exact path="/">
-            <Navbar />
-            <Home linkList={linkList} loadLinks={loadLinks} submit={submit} />
+            <Navbar userName={userName}/>
+            <Home linkList={linkList} setLinkList={setLinkList} loadLinks={loadLinks} userName={userName}/>
           </Route>
         </Switch>
         <Route exact path="/Login">

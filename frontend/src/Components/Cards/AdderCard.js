@@ -5,8 +5,8 @@ import { FiLink } from "react-icons/fi"
 
 const Adder = ({ hideAdderCard, submit })=>{
 
-    const [name, setName] = useState();
-    const [link, setLink] = useState();
+    const [name, setName] = useState("");
+    const [link, setLink] = useState("");
 
     return(
         <div className={Styles.majorContainer}>
@@ -20,7 +20,7 @@ const Adder = ({ hideAdderCard, submit })=>{
             </div>
             <div className={Styles.buttonCtn}>
                 <button onClick={()=>{
-                    submit()
+                    submit(name, link)
                 }}>
                     Submit                    
                 </button>

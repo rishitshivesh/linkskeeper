@@ -9,7 +9,7 @@ const Home = (props)=>{
     const {
         linkList,
         loadLinks,
-        submit
+        userName
     } = props;
 
     const [AdderCard, setAdderCard] = useState(false)
@@ -28,8 +28,19 @@ const Home = (props)=>{
 
     useEffect(()=>{
         loadLinks()
-    })
+    },[])
 
+    const submit = (name, link)=>{
+        const data = {
+            name:name,
+            link:link,
+            userName:userName
+        }
+
+        //api call for data response
+        loadLinks()
+        console.log(data);
+    }
     return(
         <div className={Styles.majorContainer}>
             {
