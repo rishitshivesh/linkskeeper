@@ -8,9 +8,9 @@ function Login() {
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const Login=()=>{
-            console.log(name);
-            console.log(email);
-
+        
+            name:;
+        
     }
     return (
         <div className={style.Logincontainer}>
